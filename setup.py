@@ -2,7 +2,7 @@
 # vim: et ts=4 sw=4
 
 
-from setuptools import setup
+from setuptools import setup, find_packages
 
 
 setup(
@@ -15,4 +15,6 @@ setup(
 
     description="Per-app default settings for Django",
     url="http://github.com/adammck/djappsettings",
-    packages=["lib/djappsettings"])
+    packages=find_packages('lib'),
+    package_dir={'': 'lib'}
+)

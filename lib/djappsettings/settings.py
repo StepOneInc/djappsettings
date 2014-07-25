@@ -46,7 +46,9 @@ class DjAppSettings(object):
     def _setup(self):
         self._modules = []
 
-        for module_name in project_settings.INSTALLED_APPS:
+	excluded_apps = getattr(project_settings, "DJAPPSETTINGS_EXCLUDED_APPS", [])
+        inspectable_apps = [app for app in project_settings.INSTALLED_APPS if app not in excluded_apps]
+        for module_name in inspectable_apps: 
             settings_module_name = "%s.settings" % module_name
             module = self._import(settings_module_name)
             if module is None: continue
